@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ivy-module version="2.0">
+    <info organisation="dk.profundo.maven.ivyrepo" module="main-module" branch="trunk" revision="I-1.0.0" status="integration" publication="20150323095501">
+        <description>Main module</description>
+    </info>
+        <configurations defaultconfmapping="*->@">
+
+        <!-- configurations inherited from com.clcbio.build#module-internal-parent;1.0.0.20150210150502 -->
+        <conf name="report" visibility="public" description="Reports related to the build process for this module"/>
+        <conf name="base" visibility="public" description="Shared contributions to compile and runtime configurations" extends="report" transitive="false"
+/>
+        <conf name="compile" visibility="public" description="Everything needed to compile against this module" extends="base" transitive="false"
+/>
+        <conf name="sources" visibility="public" description="Sources for this module" transitive="false"
+/>
+        <conf name="javadoc" visibility="public" description="Javadoc for this module" transitive="false"
+/>
+        <conf name="runtime" visibility="public" description="Everything needed at runtime with this module" extends="base"/>
+        <conf name="test.unit" visibility="public" description="Everything needed to compile and execute the unit tests for this module" extends="runtime"/>
+        <conf name="test.integration" visibility="public" description="Everything needed to compile and execute the integration tests for this module" extends="test.unit"/>
+        <conf name="test.system" visibility="public" description="Everything needed to compile and execute the system tests for this module" extends="test.unit"/>
+        <conf name="metrics" visibility="public" description="Various metrics and benchmark reports produced by this module" transitive="false"
+/>
+        <conf name="legal" visibility="public" description="Legal artifacts provided by this module" transitive="false"
+/>
+    </configurations>
+    <publications>
+        <artifact type="jar" ext="jar" conf="base"/>
+		<artifact type="source" ext="jar" conf="sources"/>
+		<artifact type="javadoc" ext="jar" conf="javadoc"/>
+		<artifact name="main-module-testutil" type="jar" conf="test.unit"/>
+		<artifact name="build-report" type="report" ext="zip" conf="report"/>
+		<artifact name="build-metrics" type="metrics" ext="zip" conf="metrics"/>
+    </publications>
+    <dependencies>
+        <dependency org="dk.profundo.maven.ivyrepo" name="dependent-module" rev="I-1.0.0" revConstraint="latest.integration" conf="compile,runtime" branch="trunk"/>
+        <dependency org="junit" name="junit" rev="4.11" conf="test.unit->runtime"/>
+    </dependencies>
+</ivy-module>
