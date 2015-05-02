@@ -3,7 +3,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-    <title>Ivy Repository Facade - Project Dependencies</title>
+    <title>Ivy Wagon Provider - Project Dependencies</title>
     <style type="text/css" media="all">
       @import url("./css/maven-base.css");
       @import url("./css/maven-theme.css");
@@ -17,7 +17,7 @@
   <body class="composite">
     <div id="banner">
                     <div id="bannerLeft">
-                Ivy Repository Facade
+                Ivy Wagon Provider
                 </div>
                     <div class="clear">
         <hr/>
@@ -30,7 +30,7 @@
         <span id="publishDate">Last Published: 2015-05-02</span>
                   &nbsp;| <span id="projectVersion">Version: 1.0-SNAPSHOT</span>
                       </div>
-            <div class="xright">                    <a href="./" title="Ivy Repository Facade">Ivy Repository Facade</a>
+            <div class="xright">                    <a href="./" title="Ivy Wagon Provider">Ivy Wagon Provider</a>
               
                     
       </div>
@@ -112,20 +112,20 @@
 <th>Type</th>
 <th>License</th></tr>
 <tr class="b">
-<td>org.apache.httpcomponents</td>
-<td><a class="externalLink" href="http://hc.apache.org/httpcomponents-client">httpclient</a></td>
-<td>4.3.6</td>
+<td>dk.profundo.ivybridge</td>
+<td><a class="externalLink" href="https://github.com/xylifyx/ivybridge/ivybridge-facade">ivybridge-facade</a></td>
+<td>1.0-SNAPSHOT</td>
 <td>jar</td>
-<td><a class="externalLink" href="http://www.apache.org/licenses/LICENSE-2.0.txt">Apache License, Version 2.0</a></td></tr>
+<td><a class="externalLink" href="http://opensource.org/licenses/LGPL-2.1">LGPL-2.1</a></td></tr>
 <tr class="a">
-<td>org.apache.ivy</td>
-<td><a class="externalLink" href="http://ant.apache.org/ivy/">ivy</a></td>
-<td>2.3.0</td>
+<td>org.apache.maven.wagon</td>
+<td><a class="externalLink" href="http://maven.apache.org/wagon/wagon-provider-api">wagon-provider-api</a></td>
+<td>2.8</td>
 <td>jar</td>
-<td><a class="externalLink" href="http://www.apache.org/licenses/LICENSE-2.0.txt">The Apache Software License, Version 2.0</a></td></tr></table></div><a name="Project_Dependencies_test"></a>
+<td><a class="externalLink" href="http://www.apache.org/licenses/LICENSE-2.0.txt">Apache License, Version 2.0</a></td></tr></table></div><a name="Project_Dependencies_provided"></a>
 <div class="section">
-<h3>test<a name="test"></a></h3>
-<p>The following is a list of test dependencies for this project. These dependencies are only required to compile and run unit tests for the application:</p>
+<h3>provided<a name="provided"></a></h3>
+<p>The following is a list of provided dependencies for this project. These dependencies are required to compile the application, but should be provided by default when using the library:</p>
 <table border="0" class="bodyTable">
 <tr class="a">
 <th>GroupId</th>
@@ -134,17 +134,11 @@
 <th>Type</th>
 <th>License</th></tr>
 <tr class="b">
-<td>junit</td>
-<td><a class="externalLink" href="http://junit.org">junit</a></td>
-<td>4.12</td>
+<td>org.apache.maven</td>
+<td><a class="externalLink" href="http://maven.apache.org/ref/3.2.3/maven-artifact">maven-artifact</a></td>
+<td>3.2.3</td>
 <td>jar</td>
-<td><a class="externalLink" href="http://www.eclipse.org/legal/epl-v10.html">Eclipse Public License 1.0</a></td></tr>
-<tr class="a">
-<td>org.mockito</td>
-<td><a class="externalLink" href="http://www.mockito.org">mockito-all</a></td>
-<td>1.10.19</td>
-<td>jar</td>
-<td><a class="externalLink" href="http://github.com/mockito/mockito/blob/master/LICENSE">The MIT License</a></td></tr></table></div></div><a name="Project_Transitive_Dependencies"></a>
+<td><a class="externalLink" href="http://www.apache.org/licenses/LICENSE-2.0.txt">Apache License, Version 2.0</a></td></tr></table></div></div><a name="Project_Transitive_Dependencies"></a>
 <div class="section">
 <h2>Project Transitive Dependencies<a name="Project_Transitive_Dependencies"></a></h2>
 <p>The following is a list of transitive dependencies for this project. Transitive dependencies are the dependencies of the project dependencies.</p><a name="Project_Transitive_Dependencies_compile"></a>
@@ -172,26 +166,28 @@
 <td><a class="externalLink" href="http://www.apache.org/licenses/LICENSE-2.0.txt">The Apache Software License, Version 2.0</a></td></tr>
 <tr class="b">
 <td>org.apache.httpcomponents</td>
+<td><a class="externalLink" href="http://hc.apache.org/httpcomponents-client">httpclient</a></td>
+<td>4.3.6</td>
+<td>jar</td>
+<td><a class="externalLink" href="http://www.apache.org/licenses/LICENSE-2.0.txt">Apache License, Version 2.0</a></td></tr>
+<tr class="a">
+<td>org.apache.httpcomponents</td>
 <td><a class="externalLink" href="http://hc.apache.org/httpcomponents-core-ga">httpcore</a></td>
 <td>4.3.3</td>
 <td>jar</td>
-<td><a class="externalLink" href="http://www.apache.org/licenses/LICENSE-2.0.txt">Apache License, Version 2.0</a></td></tr></table></div><a name="Project_Transitive_Dependencies_test"></a>
-<div class="section">
-<h3>test<a name="test"></a></h3>
-<p>The following is a list of test dependencies for this project. These dependencies are only required to compile and run unit tests for the application:</p>
-<table border="0" class="bodyTable">
-<tr class="a">
-<th>GroupId</th>
-<th>ArtifactId</th>
-<th>Version</th>
-<th>Type</th>
-<th>License</th></tr>
+<td><a class="externalLink" href="http://www.apache.org/licenses/LICENSE-2.0.txt">Apache License, Version 2.0</a></td></tr>
 <tr class="b">
-<td>org.hamcrest</td>
-<td><a class="externalLink" href="https://github.com/hamcrest/JavaHamcrest/hamcrest-core">hamcrest-core</a></td>
-<td>1.3</td>
+<td>org.apache.ivy</td>
+<td><a class="externalLink" href="http://ant.apache.org/ivy/">ivy</a></td>
+<td>2.3.0</td>
 <td>jar</td>
-<td><a class="externalLink" href="http://www.opensource.org/licenses/bsd-license.php">New BSD License</a></td></tr></table></div></div><a name="Project_Dependency_Graph"></a>
+<td><a class="externalLink" href="http://www.apache.org/licenses/LICENSE-2.0.txt">The Apache Software License, Version 2.0</a></td></tr>
+<tr class="a">
+<td>org.codehaus.plexus</td>
+<td><a class="externalLink" href="http://plexus.codehaus.org/plexus-utils">plexus-utils</a></td>
+<td>3.0.15</td>
+<td>jar</td>
+<td><a class="externalLink" href="http://www.apache.org/licenses/LICENSE-2.0.txt">The Apache Software License, Version 2.0</a></td></tr></table></div></div><a name="Project_Dependency_Graph"></a>
 <div class="section">
 <h2>Project Dependency Graph<a name="Project_Dependency_Graph"></a></h2><script language="javascript" type="text/javascript">
       function toggleDependencyDetail( divId, imgId )
@@ -214,7 +210,17 @@
 <div class="section">
 <h3>Dependency Tree<a name="Dependency_Tree"></a></h3>
 <ul>
-<li>dk.profundo.ivybridge:ivybridge-facade:jar:1.0-SNAPSHOT <img id="_img1" src="./images/icon_info_sml.gif" alt="Information" onclick="toggleDependencyDetail( '_dep0', '_img1' );" style="cursor: pointer;vertical-align:text-bottom;"></img><div id="_dep0" style="display:none">
+<li>dk.profundo.ivybridge:ivybridge-wagon:jar:1.0-SNAPSHOT <img id="_img1" src="./images/icon_info_sml.gif" alt="Information" onclick="toggleDependencyDetail( '_dep0', '_img1' );" style="cursor: pointer;vertical-align:text-bottom;"></img><div id="_dep0" style="display:none">
+<table border="0" class="bodyTable">
+<tr class="a">
+<th>Ivy Wagon Provider</th></tr>
+<tr class="b">
+<td>
+<p><b>Description: </b>There is currently no description associated with this project.</p>
+<p><b>URL: </b><a class="externalLink" href="http://maven.apache.org">http://maven.apache.org</a></p>
+<p><b>Project License: </b><a class="externalLink" href="http://opensource.org/licenses/LGPL-2.1">LGPL-2.1</a></p></td></tr></table></div>
+<ul>
+<li>dk.profundo.ivybridge:ivybridge-facade:jar:1.0-SNAPSHOT (compile) <img id="_img3" src="./images/icon_info_sml.gif" alt="Information" onclick="toggleDependencyDetail( '_dep2', '_img3' );" style="cursor: pointer;vertical-align:text-bottom;"></img><div id="_dep2" style="display:none">
 <table border="0" class="bodyTable">
 <tr class="a">
 <th>Ivy Repository Facade</th></tr>
@@ -224,7 +230,7 @@
 <p><b>URL: </b><a class="externalLink" href="https://github.com/xylifyx/ivybridge/ivybridge-facade">https://github.com/xylifyx/ivybridge/ivybridge-facade</a></p>
 <p><b>Project License: </b><a class="externalLink" href="http://opensource.org/licenses/LGPL-2.1">LGPL-2.1</a></p></td></tr></table></div>
 <ul>
-<li>org.apache.ivy:ivy:jar:2.3.0 (compile) <img id="_img3" src="./images/icon_info_sml.gif" alt="Information" onclick="toggleDependencyDetail( '_dep2', '_img3' );" style="cursor: pointer;vertical-align:text-bottom;"></img><div id="_dep2" style="display:none">
+<li>org.apache.ivy:ivy:jar:2.3.0 (compile) <img id="_img5" src="./images/icon_info_sml.gif" alt="Information" onclick="toggleDependencyDetail( '_dep4', '_img5' );" style="cursor: pointer;vertical-align:text-bottom;"></img><div id="_dep4" style="display:none">
 <table border="0" class="bodyTable">
 <tr class="a">
 <th>Apache Ivy</th></tr>
@@ -237,35 +243,7 @@
     and users.</p>
 <p><b>URL: </b><a class="externalLink" href="http://ant.apache.org/ivy/">http://ant.apache.org/ivy/</a></p>
 <p><b>Project License: </b><a class="externalLink" href="http://www.apache.org/licenses/LICENSE-2.0.txt">The Apache Software License, Version 2.0</a></p></td></tr></table></div></li>
-<li>junit:junit:jar:4.12 (test) <img id="_img5" src="./images/icon_info_sml.gif" alt="Information" onclick="toggleDependencyDetail( '_dep4', '_img5' );" style="cursor: pointer;vertical-align:text-bottom;"></img><div id="_dep4" style="display:none">
-<table border="0" class="bodyTable">
-<tr class="a">
-<th>JUnit</th></tr>
-<tr class="b">
-<td>
-<p><b>Description: </b>JUnit is a unit testing framework for Java, created by Erich Gamma and Kent Beck.</p>
-<p><b>URL: </b><a class="externalLink" href="http://junit.org">http://junit.org</a></p>
-<p><b>Project License: </b><a class="externalLink" href="http://www.eclipse.org/legal/epl-v10.html">Eclipse Public License 1.0</a></p></td></tr></table></div>
-<ul>
-<li>org.hamcrest:hamcrest-core:jar:1.3 (test) <img id="_img7" src="./images/icon_info_sml.gif" alt="Information" onclick="toggleDependencyDetail( '_dep6', '_img7' );" style="cursor: pointer;vertical-align:text-bottom;"></img><div id="_dep6" style="display:none">
-<table border="0" class="bodyTable">
-<tr class="a">
-<th>Hamcrest Core</th></tr>
-<tr class="b">
-<td>
-<p><b>Description: </b>This is the core API of hamcrest matcher framework to be used by third-party framework providers. This includes the a foundation set of matcher implementations for common operations.</p>
-<p><b>URL: </b><a class="externalLink" href="https://github.com/hamcrest/JavaHamcrest/hamcrest-core">https://github.com/hamcrest/JavaHamcrest/hamcrest-core</a></p>
-<p><b>Project License: </b><a class="externalLink" href="http://www.opensource.org/licenses/bsd-license.php">New BSD License</a></p></td></tr></table></div></li></ul></li>
-<li>org.mockito:mockito-all:jar:1.10.19 (test) <img id="_img9" src="./images/icon_info_sml.gif" alt="Information" onclick="toggleDependencyDetail( '_dep8', '_img9' );" style="cursor: pointer;vertical-align:text-bottom;"></img><div id="_dep8" style="display:none">
-<table border="0" class="bodyTable">
-<tr class="a">
-<th>Mockito</th></tr>
-<tr class="b">
-<td>
-<p><b>Description: </b>Mock objects library for java</p>
-<p><b>URL: </b><a class="externalLink" href="http://www.mockito.org">http://www.mockito.org</a></p>
-<p><b>Project License: </b><a class="externalLink" href="http://github.com/mockito/mockito/blob/master/LICENSE">The MIT License</a></p></td></tr></table></div></li>
-<li>org.apache.httpcomponents:httpclient:jar:4.3.6 (compile) <img id="_img11" src="./images/icon_info_sml.gif" alt="Information" onclick="toggleDependencyDetail( '_dep10', '_img11' );" style="cursor: pointer;vertical-align:text-bottom;"></img><div id="_dep10" style="display:none">
+<li>org.apache.httpcomponents:httpclient:jar:4.3.6 (compile) <img id="_img7" src="./images/icon_info_sml.gif" alt="Information" onclick="toggleDependencyDetail( '_dep6', '_img7' );" style="cursor: pointer;vertical-align:text-bottom;"></img><div id="_dep6" style="display:none">
 <table border="0" class="bodyTable">
 <tr class="a">
 <th>Apache HttpClient</th></tr>
@@ -275,7 +253,7 @@
 <p><b>URL: </b><a class="externalLink" href="http://hc.apache.org/httpcomponents-client">http://hc.apache.org/httpcomponents-client</a></p>
 <p><b>Project License: </b><a class="externalLink" href="http://www.apache.org/licenses/LICENSE-2.0.txt">Apache License, Version 2.0</a></p></td></tr></table></div>
 <ul>
-<li>org.apache.httpcomponents:httpcore:jar:4.3.3 (compile) <img id="_img13" src="./images/icon_info_sml.gif" alt="Information" onclick="toggleDependencyDetail( '_dep12', '_img13' );" style="cursor: pointer;vertical-align:text-bottom;"></img><div id="_dep12" style="display:none">
+<li>org.apache.httpcomponents:httpcore:jar:4.3.3 (compile) <img id="_img9" src="./images/icon_info_sml.gif" alt="Information" onclick="toggleDependencyDetail( '_dep8', '_img9' );" style="cursor: pointer;vertical-align:text-bottom;"></img><div id="_dep8" style="display:none">
 <table border="0" class="bodyTable">
 <tr class="a">
 <th>Apache HttpCore</th></tr>
@@ -284,7 +262,7 @@
 <p><b>Description: </b>HttpComponents Core (blocking I/O)</p>
 <p><b>URL: </b><a class="externalLink" href="http://hc.apache.org/httpcomponents-core-ga">http://hc.apache.org/httpcomponents-core-ga</a></p>
 <p><b>Project License: </b><a class="externalLink" href="http://www.apache.org/licenses/LICENSE-2.0.txt">Apache License, Version 2.0</a></p></td></tr></table></div></li>
-<li>commons-logging:commons-logging:jar:1.1.3 (compile) <img id="_img15" src="./images/icon_info_sml.gif" alt="Information" onclick="toggleDependencyDetail( '_dep14', '_img15' );" style="cursor: pointer;vertical-align:text-bottom;"></img><div id="_dep14" style="display:none">
+<li>commons-logging:commons-logging:jar:1.1.3 (compile) <img id="_img11" src="./images/icon_info_sml.gif" alt="Information" onclick="toggleDependencyDetail( '_dep10', '_img11' );" style="cursor: pointer;vertical-align:text-bottom;"></img><div id="_dep10" style="display:none">
 <table border="0" class="bodyTable">
 <tr class="a">
 <th>Commons Logging</th></tr>
@@ -294,7 +272,7 @@
     well known logging systems.</p>
 <p><b>URL: </b><a class="externalLink" href="http://commons.apache.org/proper/commons-logging/">http://commons.apache.org/proper/commons-logging/</a></p>
 <p><b>Project License: </b><a class="externalLink" href="http://www.apache.org/licenses/LICENSE-2.0.txt">The Apache Software License, Version 2.0</a></p></td></tr></table></div></li>
-<li>commons-codec:commons-codec:jar:1.6 (compile) <img id="_img17" src="./images/icon_info_sml.gif" alt="Information" onclick="toggleDependencyDetail( '_dep16', '_img17' );" style="cursor: pointer;vertical-align:text-bottom;"></img><div id="_dep16" style="display:none">
+<li>commons-codec:commons-codec:jar:1.6 (compile) <img id="_img13" src="./images/icon_info_sml.gif" alt="Information" onclick="toggleDependencyDetail( '_dep12', '_img13' );" style="cursor: pointer;vertical-align:text-bottom;"></img><div id="_dep12" style="display:none">
 <table border="0" class="bodyTable">
 <tr class="a">
 <th>Commons Codec</th></tr>
@@ -305,15 +283,47 @@
      widely used encoders and decoders, the codec package also maintains a
      collection of phonetic encoding utilities.</p>
 <p><b>URL: </b><a class="externalLink" href="http://commons.apache.org/codec/">http://commons.apache.org/codec/</a></p>
-<p><b>Project License: </b><a class="externalLink" href="http://www.apache.org/licenses/LICENSE-2.0.txt">The Apache Software License, Version 2.0</a></p></td></tr></table></div></li></ul></li></ul></li></ul></div></div><a name="Licenses"></a>
+<p><b>Project License: </b><a class="externalLink" href="http://www.apache.org/licenses/LICENSE-2.0.txt">The Apache Software License, Version 2.0</a></p></td></tr></table></div></li></ul></li></ul></li>
+<li>org.apache.maven.wagon:wagon-provider-api:jar:2.8 (compile) <img id="_img15" src="./images/icon_info_sml.gif" alt="Information" onclick="toggleDependencyDetail( '_dep14', '_img15' );" style="cursor: pointer;vertical-align:text-bottom;"></img><div id="_dep14" style="display:none">
+<table border="0" class="bodyTable">
+<tr class="a">
+<th>Apache Maven Wagon :: API</th></tr>
+<tr class="b">
+<td>
+<p><b>Description: </b>Maven Wagon API that defines the contract between different Wagon implementations</p>
+<p><b>URL: </b><a class="externalLink" href="http://maven.apache.org/wagon/wagon-provider-api">http://maven.apache.org/wagon/wagon-provider-api</a></p>
+<p><b>Project License: </b><a class="externalLink" href="http://www.apache.org/licenses/LICENSE-2.0.txt">Apache License, Version 2.0</a></p></td></tr></table></div>
+<ul>
+<li>org.codehaus.plexus:plexus-utils:jar:3.0.15 (compile) <img id="_img17" src="./images/icon_info_sml.gif" alt="Information" onclick="toggleDependencyDetail( '_dep16', '_img17' );" style="cursor: pointer;vertical-align:text-bottom;"></img><div id="_dep16" style="display:none">
+<table border="0" class="bodyTable">
+<tr class="a">
+<th>Plexus Common Utilities</th></tr>
+<tr class="b">
+<td>
+<p><b>Description: </b>A collection of various utility classes to ease working with strings, files, command lines, XML and
+    more.</p>
+<p><b>URL: </b><a class="externalLink" href="http://plexus.codehaus.org/plexus-utils">http://plexus.codehaus.org/plexus-utils</a></p>
+<p><b>Project License: </b><a class="externalLink" href="http://www.apache.org/licenses/LICENSE-2.0.txt">The Apache Software License, Version 2.0</a></p></td></tr></table></div></li></ul></li>
+<li>org.apache.maven:maven-artifact:jar:3.2.3 (provided) <img id="_img19" src="./images/icon_info_sml.gif" alt="Information" onclick="toggleDependencyDetail( '_dep18', '_img19' );" style="cursor: pointer;vertical-align:text-bottom;"></img><div id="_dep18" style="display:none">
+<table border="0" class="bodyTable">
+<tr class="a">
+<th>Maven Artifact</th></tr>
+<tr class="b">
+<td>
+<p><b>Description: </b>Maven is a software build management and
+    comprehension tool. Based on the concept of a project object model:
+    builds, dependency management, documentation creation, site
+    publication, and distribution publication are all controlled from
+    the declarative file. Maven can be extended by plugins to utilise a
+    number of other development tools for reporting or the build
+    process.</p>
+<p><b>URL: </b><a class="externalLink" href="http://maven.apache.org/ref/3.2.3/maven-artifact">http://maven.apache.org/ref/3.2.3/maven-artifact</a></p>
+<p><b>Project License: </b><a class="externalLink" href="http://www.apache.org/licenses/LICENSE-2.0.txt">Apache License, Version 2.0</a></p></td></tr></table></div></li></ul></li></ul></div></div><a name="Licenses"></a>
 <div class="section">
 <h2>Licenses<a name="Licenses"></a></h2>
-<p><b>LGPL-2.1: </b>Ivy Repository Facade</p>
-<p><b>Eclipse Public License 1.0: </b>JUnit</p>
-<p><b>The MIT License: </b>Mockito</p>
-<p><b>Apache License, Version 2.0: </b>Apache HttpClient, Apache HttpCore</p>
-<p><b>New BSD License: </b>Hamcrest Core</p>
-<p><b>The Apache Software License, Version 2.0: </b>Apache Ivy, Commons Codec, Commons Logging</p></div><a name="Dependency_File_Details"></a>
+<p><b>LGPL-2.1: </b>Ivy Repository Facade, Ivy Wagon Provider</p>
+<p><b>Apache License, Version 2.0: </b>Apache HttpClient, Apache HttpCore, Apache Maven Wagon :: API, Maven Artifact</p>
+<p><b>The Apache Software License, Version 2.0: </b>Apache Ivy, Commons Codec, Commons Logging, Plexus Common Utilities</p></div><a name="Dependency_File_Details"></a>
 <div class="section">
 <h2>Dependency File Details<a name="Dependency_File_Details"></a></h2>
 <table border="0" class="bodyTable">
@@ -342,12 +352,12 @@
 <td>1.1</td>
 <td>Yes</td></tr>
 <tr class="b">
-<td>junit-4.12.jar</td>
-<td>314.93 kB</td>
-<td>323</td>
-<td>286</td>
-<td>30</td>
-<td>1.5</td>
+<td>ivybridge-facade-1.0-SNAPSHOT.jar</td>
+<td>16.95 kB</td>
+<td>18</td>
+<td>8</td>
+<td>1</td>
+<td>1.6</td>
 <td>Yes</td></tr>
 <tr class="a">
 <td>httpclient-4.3.6.jar</td>
@@ -374,22 +384,30 @@
 <td>1.4</td>
 <td>Yes</td></tr>
 <tr class="b">
-<td>hamcrest-core-1.3.jar</td>
-<td>45.02 kB</td>
-<td>52</td>
-<td>45</td>
-<td>3</td>
-<td>1.5</td>
+<td>maven-artifact-3.2.3.jar</td>
+<td>53.72 kB</td>
+<td>57</td>
+<td>32</td>
+<td>11</td>
+<td>1.6</td>
 <td>Yes</td></tr>
 <tr class="a">
-<td>mockito-all-1.10.19.jar</td>
-<td>1.23 MB</td>
-<td>1215</td>
-<td>752</td>
-<td>79</td>
+<td>wagon-provider-api-2.8.jar</td>
+<td>52.58 kB</td>
+<td>60</td>
+<td>39</td>
+<td>8</td>
 <td>1.5</td>
 <td>Yes</td></tr>
 <tr class="b">
+<td>plexus-utils-3.0.15.jar</td>
+<td>238.95 kB</td>
+<td>128</td>
+<td>103</td>
+<td>9</td>
+<td>1.5</td>
+<td>Yes</td></tr>
+<tr class="a">
 <th>Total</th>
 <th>Size</th>
 <th>Entries</th>
@@ -397,30 +415,30 @@
 <th>Packages</th>
 <th>Java Version</th>
 <th>Debug Information</th></tr>
-<tr class="a">
-<td>8</td>
-<td>3.99 MB</td>
-<td>3409</td>
-<td>2567</td>
-<td>223</td>
-<td>1.5</td>
-<td>8</td></tr>
 <tr class="b">
-<td>compile: 5</td>
-<td>compile: 2.39 MB</td>
-<td>compile: 1819</td>
-<td>compile: 1484</td>
-<td>compile: 111</td>
-<td>-</td>
-<td>compile: 5</td></tr>
+<td>9</td>
+<td>2.75 MB</td>
+<td>2082</td>
+<td>1666</td>
+<td>140</td>
+<td>1.6</td>
+<td>9</td></tr>
 <tr class="a">
-<td>test: 3</td>
-<td>test: 1.59 MB</td>
-<td>test: 1590</td>
-<td>test: 1083</td>
-<td>test: 112</td>
+<td>compile: 8</td>
+<td>compile: 2.70 MB</td>
+<td>compile: 2025</td>
+<td>compile: 1634</td>
+<td>compile: 129</td>
 <td>-</td>
-<td>test: 3</td></tr></table></div><a name="Dependency_Repository_Locations"></a>
+<td>compile: 8</td></tr>
+<tr class="b">
+<td>provided: 1</td>
+<td>provided: 53.72 kB</td>
+<td>provided: 57</td>
+<td>provided: 32</td>
+<td>provided: 11</td>
+<td>-</td>
+<td>provided: 1</td></tr></table></div><a name="Dependency_Repository_Locations"></a>
 <div class="section">
 <h2>Dependency Repository Locations<a name="Dependency_Repository_Locations"></a></h2>
 <table border="0" class="bodyTable">
@@ -462,8 +480,8 @@
 <td>-</td>
 <td>-</td></tr>
 <tr class="b">
-<td>junit:junit:jar:4.12</td>
-<td><a class="externalLink" href="https://repo.maven.apache.org/maven2/junit/junit/4.12/junit-4.12.jar"><img alt="Found at https://repo.maven.apache.org/maven2" src="images/icon_success_sml.gif" /></a></td>
+<td>dk.profundo.ivybridge:ivybridge-facade:jar:1.0-SNAPSHOT</td>
+<td>-</td>
 <td>-</td>
 <td>-</td></tr>
 <tr class="a">
@@ -482,22 +500,27 @@
 <td>-</td>
 <td>-</td></tr>
 <tr class="b">
-<td>org.hamcrest:hamcrest-core:jar:1.3</td>
-<td><a class="externalLink" href="https://repo.maven.apache.org/maven2/org/hamcrest/hamcrest-core/1.3/hamcrest-core-1.3.jar"><img alt="Found at https://repo.maven.apache.org/maven2" src="images/icon_success_sml.gif" /></a></td>
+<td>org.apache.maven:maven-artifact:jar:3.2.3</td>
+<td><a class="externalLink" href="https://repo.maven.apache.org/maven2/org/apache/maven/maven-artifact/3.2.3/maven-artifact-3.2.3.jar"><img alt="Found at https://repo.maven.apache.org/maven2" src="images/icon_success_sml.gif" /></a></td>
 <td>-</td>
 <td>-</td></tr>
 <tr class="a">
-<td>org.mockito:mockito-all:jar:1.10.19</td>
-<td><a class="externalLink" href="https://repo.maven.apache.org/maven2/org/mockito/mockito-all/1.10.19/mockito-all-1.10.19.jar"><img alt="Found at https://repo.maven.apache.org/maven2" src="images/icon_success_sml.gif" /></a></td>
+<td>org.apache.maven.wagon:wagon-provider-api:jar:2.8</td>
+<td><a class="externalLink" href="https://repo.maven.apache.org/maven2/org/apache/maven/wagon/wagon-provider-api/2.8/wagon-provider-api-2.8.jar"><img alt="Found at https://repo.maven.apache.org/maven2" src="images/icon_success_sml.gif" /></a></td>
 <td>-</td>
 <td>-</td></tr>
 <tr class="b">
+<td>org.codehaus.plexus:plexus-utils:jar:3.0.15</td>
+<td><a class="externalLink" href="https://repo.maven.apache.org/maven2/org/codehaus/plexus/plexus-utils/3.0.15/plexus-utils-3.0.15.jar"><img alt="Found at https://repo.maven.apache.org/maven2" src="images/icon_success_sml.gif" /></a></td>
+<td>-</td>
+<td>-</td></tr>
+<tr class="a">
 <th>Total</th>
 <th>central</th>
 <th>spy</th>
 <th>apache.snapshots</th></tr>
-<tr class="a">
-<td>8 (compile: 5, test: 3)</td>
+<tr class="b">
+<td>9 (compile: 8, provided: 1)</td>
 <td>8</td>
 <td>0</td>
 <td>0</td></tr></table></div>
