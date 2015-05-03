@@ -4,3 +4,5 @@
 /*/target
 /target
 nohup.out
+*.releaseBackup
+release.properties
