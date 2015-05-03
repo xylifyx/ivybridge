@@ -41,7 +41,7 @@
         <url>https://github.com/xylifyx/ivybridge</url>
         <connection>scm:git:git://github.com/xylifyx/ivybridge.git</connection>
         <developerConnection>scm:git:git@github.com:xylifyx/ivybridge.git</developerConnection>
-	<tag>HEAD</tag>
+	<tag>master</tag>
     </scm>
 
     <developers>
