@@ -17,6 +17,21 @@
         <bintray.packagename>${project.groupId}</bintray.packagename>
     </properties>
     
+    <!-- access token configuraiton for settings.xml -->
+    <!--
+    <servers>
+        <server>
+            <id>bintray</id>
+            <username>bintray_username</username>
+            <password>XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX</password>
+        </server>
+        <server>
+            <id>github</id>
+            <password>XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX</password>
+        </server>
+    </servers>
+    -->
+    
     <url>http://xylifyx.github.io/ivybridge</url>
 
     <issueManagement>
