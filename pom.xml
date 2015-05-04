@@ -24,7 +24,7 @@
     <distributionManagement>
         <repository>
             <id>bintray</id>
-            <url>https://api.bintray.com/maven/xylifyx/ivybridge/ivybridge</url>
+            <url>https://api.bintray.com/maven/erik-martino/ivybridge/dk.profundo.ivybridge</url>
         </repository>
     </distributionManagement>
 
