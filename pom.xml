@@ -4,7 +4,7 @@
     <groupId>dk.profundo.ivybridge</groupId>
     <artifactId>ivybridge</artifactId>
     <name>Ivy Bridge</name>
-    <version>1.0.7-SNAPSHOT</version>
+    <version>1.0.7</version>
     <packaging>pom</packaging>
     
     <properties>
@@ -59,7 +59,7 @@
         <url>https://github.com/xylifyx/ivybridge</url>
         <connection>scm:git:git://github.com/xylifyx/ivybridge.git</connection>
         <developerConnection>scm:git:git@github.com:xylifyx/ivybridge.git</developerConnection>
-        <tag>HEAD</tag>
+        <tag>ivybridge-1.0.7</tag>
     </scm>
 
     <developers>
