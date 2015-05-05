@@ -3,6 +3,11 @@
     <modelVersion>4.0.0</modelVersion>
     <artifactId>ivybridge-facade</artifactId>
 
+    <description>
+        Simple Ivy integration. Resolve dependencies transitively 
+        in ivy repositories.
+    </description>
+
     <parent>
         <groupId>dk.profundo.ivybridge</groupId>
         <artifactId>ivybridge</artifactId>

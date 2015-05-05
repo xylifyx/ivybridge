@@ -3,6 +3,11 @@
 
     <artifactId>ivybridge-wagon</artifactId>
 
+    <description>
+        Simple Ivy integration. Resolve dependencies transitively 
+        in ivy repositories.
+    </description>
+
     <parent>
         <groupId>dk.profundo.ivybridge</groupId>
         <artifactId>ivybridge</artifactId>
