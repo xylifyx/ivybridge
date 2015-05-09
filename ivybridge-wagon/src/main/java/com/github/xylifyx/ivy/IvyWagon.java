@@ -24,6 +24,7 @@ import dk.profundo.ivybridge.MavenRepositoryProxy;
 import java.beans.IntrospectionException;
 import java.io.ByteArrayInputStream;
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
 import java.net.URI;
@@ -73,11 +74,15 @@ public class IvyWagon extends StreamWagon {
     @Override
     public void fillInputData(InputData inputData)
         throws TransferFailedException, ResourceDoesNotExistException {
+        String repoUrl = getResolverUrl();
         String name = inputData.getResource().getName();
-        try {
-            String repoUrl = getResolverUrl();
-            final IvyBridgeOptions options = IvyBridgeOptions.newOptionsFromUri(repoUrl);
+        InputStream inputStream = streamResult(name, repoUrl);
+        inputData.setInputStream(inputStream);
+    }
 
+    public static InputStream streamResult(String name, String repoUrl) throws ResourceDoesNotExistException, TransferFailedException {
+        try {
+            final IvyBridgeOptions options = IvyBridgeOptions.newOptionsFromUri(repoUrl);
             MavenRepositoryProxy proxy = new MavenRepositoryProxy(options);
             final URI artifactUri = proxy.resolveArtifact(name);
 
@@ -85,21 +90,25 @@ public class IvyWagon extends StreamWagon {
                 throw new ResourceDoesNotExistException("resource not found: " + name);
             }
 
-            InputStream inputStream;
+            InputStream inputStream = proxy.toInputStream(artifactUri);
 
-            if (artifactUri.getScheme().equals("data")) {
-                byte[] bytes = DataUri.fromURI(artifactUri.toASCIIString());
-                inputStream = new ByteArrayInputStream(bytes);
-            } else {
-                inputStream = artifactUri.toURL().openStream();
-            }
-            inputData.setInputStream(inputStream);
-        } catch (URISyntaxException | IntrospectionException ex) {
-            Logger.getLogger(IvyWagon.class.getName()).log(Level.SEVERE, null, ex);
-            throw new TransferFailedException("Exception", ex);
-        } catch (IOException | RuntimeException | ParseException ex) {
+            return inputStream;
+        } catch (FileNotFoundException ex) {
             throw new ResourceDoesNotExistException("resource not found: " + name, ex);
+        } catch (URISyntaxException | IntrospectionException | IllegalArgumentException | ParseException | IOException ex) {
+            throw new TransferFailedException("Exception", ex);
         }
+    }
+
+    private static InputStream toInputStream(final URI artifactUri) throws IOException {
+        InputStream inputStream;
+        if (artifactUri.getScheme().equals("data")) {
+            byte[] bytes = DataUri.fromURI(artifactUri.toASCIIString());
+            inputStream = new ByteArrayInputStream(bytes);
+        } else {
+            inputStream = artifactUri.toURL().openStream();
+        }
+        return inputStream;
     }
 
     @Override
@@ -110,12 +119,12 @@ public class IvyWagon extends StreamWagon {
 
     @Override
     protected void openConnectionInternal() throws ConnectionException {
-        
+
     }
 
     @Override
     public void closeConnection() {
-        
+
     }
 
     @Override
