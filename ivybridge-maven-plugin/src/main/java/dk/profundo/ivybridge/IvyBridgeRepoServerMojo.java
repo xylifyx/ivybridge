@@ -23,6 +23,8 @@ import java.io.OutputStream;
 import java.net.InetAddress;
 import java.net.InetSocketAddress;
 import java.net.UnknownHostException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import org.apache.maven.plugin.AbstractMojo;
 import org.apache.maven.plugins.annotations.Mojo;
 import org.apache.maven.plugin.MojoExecutionException;
@@ -48,38 +50,56 @@ public class IvyBridgeRepoServerMojo
 
         try {
 
-            HttpServer server = HttpServer.create(new InetSocketAddress(InetAddress.getLocalHost(), port), port);
+            final HttpServer server = HttpServer.create(new InetSocketAddress(InetAddress.getLocalHost(), port), port);
             server.createContext("/", new HttpHandler() {
 
                 @Override
                 public void handle(HttpExchange he) throws IOException {
                     he.getResponseHeaders().add("Content-Type", "text/html;charset=utf8");
                     final OutputStream out = he.getResponseBody();
-                    out.write(("<html><body>"
+                    final byte[] response = ("<html><body>"
                         + "<h1>IvyBridge Repository Frontend</h1>"
                         + "<a href='repo'>repo</a>"
                         + "<hr>"
-                        + "").getBytes("UTF-8"));
-                    out.close();
+                        + "").getBytes("UTF-8");
+                    he.sendResponseHeaders(200, response.length);
+                    out.write(response);
+                    out.flush();
                 }
             });
 
-            server.createContext("/repo/*", new HttpHandler() {
+            server.createContext("/repo", new HttpHandler() {
 
                 @Override
                 public void handle(HttpExchange he) throws IOException {
                     he.getResponseHeaders().add("Content-Type", "text/html;charset=utf8");
                     final OutputStream out = he.getResponseBody();
-                    out.write("<html><body><h1>IvyBridge Repository</h1>".getBytes("UTF-8"));
-                    out.close();
+                    final byte[] response = "<html><body><h1>IvyBridge Repository</h1>".getBytes("UTF-8");
+                    he.sendResponseHeaders(200, response.length);
+                    out.write(response);
+                    out.flush();
                 }
 
             });
             server.start();
+            getLog().info("Started at port: " + port);
+
+            Thread.sleep(Long.MAX_VALUE);
+            Runtime.getRuntime().addShutdownHook(new Thread() {
+
+                @Override
+                public void run() {
+                    getLog().info("Stopping server");
+                    server.stop(0);
+                }
+
+            });
         } catch (UnknownHostException ex) {
             throw new MojoExecutionException("unknown host", ex);
         } catch (IOException ex) {
             throw new MojoExecutionException("open server", ex);
+        } catch (InterruptedException ex) {
+            getLog().info("Interrupted");
         }
     }
 }
