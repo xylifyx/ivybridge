@@ -12,9 +12,9 @@ Requests for pom files is translated into an Ivy resolve and uses ivy's builtin 
 
 Start a repo server using 
 
-   mvn dk.profundo.ivybridge:ivybridge-maven-plugin:LATEST:repo-server -Divyrepo='file:///home/luser/workspace/ivybridge/ivybridge-facade/src/test/resources/ivyrepo/?branch=trunk&ivypattern=([branch]/)[organisation]/[module]/[revision]/[type]/ivy-[revision].xml&artpattern=([branch]/)[organisation]/[module]/[revision]/[type]/[artifact]-[revision].[ext]'
+    mvn dk.profundo.ivybridge:ivybridge-maven-plugin:LATEST:repo-server -Divyrepo='file:///home/luser/workspace/ivybridge/ivybridge-facade/src/test/resources/ivyrepo/?branch=trunk&ivypattern=([branch]/)[organisation]/[module]/[revision]/[type]/ivy-[revision].xml&artpattern=([branch]/)[organisation]/[module]/[revision]/[type]/[artifact]-[revision].[ext]'
 
 Then you can resolve artifacts using standard maven repository format
 
-   http://erikmartino.local:8159/repo/dk/profundo/maven.ivyrepo/main-module/I-1.0.0/main-module-I-1.0.0.jar
+   http://monsterlaptop.local:8159/repo/dk/profundo/maven.ivyrepo/main-module/I-1.0.0/main-module-I-1.0.0.jar
 
