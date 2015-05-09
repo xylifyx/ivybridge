@@ -3,7 +3,6 @@
  */
 package dk.profundo.ivybridge;
 
-import java.beans.IntrospectionException;
 import java.io.ByteArrayInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;

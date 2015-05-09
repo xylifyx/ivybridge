@@ -18,11 +18,7 @@ package com.github.xylifyx.ivy;
  * specific language governing permissions and limitations
  * under the License.
  */
-import dk.profundo.ivybridge.DataUri;
-import dk.profundo.ivybridge.IvyBridgeOptions;
-import dk.profundo.ivybridge.MavenRepositoryProxy;
 import java.beans.IntrospectionException;
-import java.io.ByteArrayInputStream;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
@@ -32,8 +28,6 @@ import java.net.URISyntaxException;
 import java.text.ParseException;
 import java.util.Collections;
 import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 import org.apache.maven.wagon.ConnectionException;
 import org.apache.maven.wagon.InputData;
@@ -43,6 +37,9 @@ import org.apache.maven.wagon.StreamWagon;
 import org.apache.maven.wagon.TransferFailedException;
 import org.apache.maven.wagon.authorization.AuthorizationException;
 import org.apache.maven.wagon.repository.Repository;
+
+import dk.profundo.ivybridge.IvyBridgeOptions;
+import dk.profundo.ivybridge.MavenRepositoryProxy;
 
 /**
  * Wagon Provider for Ivy repositories
@@ -100,16 +97,6 @@ public class IvyWagon extends StreamWagon {
         }
     }
 
-    private static InputStream toInputStream(final URI artifactUri) throws IOException {
-        InputStream inputStream;
-        if (artifactUri.getScheme().equals("data")) {
-            byte[] bytes = DataUri.fromURI(artifactUri.toASCIIString());
-            inputStream = new ByteArrayInputStream(bytes);
-        } else {
-            inputStream = artifactUri.toURL().openStream();
-        }
-        return inputStream;
-    }
 
     @Override
     public void fillOutputData(OutputData outputData)

@@ -15,12 +15,8 @@ package dk.profundo.ivybridge;
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-import com.sun.net.httpserver.HttpExchange;
-import com.sun.net.httpserver.HttpHandler;
-import com.sun.net.httpserver.HttpServer;
 import java.beans.IntrospectionException;
 import java.io.IOException;
-import java.io.InputStream;
 import java.io.OutputStream;
 import java.io.UnsupportedEncodingException;
 import java.net.InetAddress;
@@ -29,15 +25,19 @@ import java.net.URI;
 import java.net.URISyntaxException;
 import java.net.UnknownHostException;
 import java.text.ParseException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
+
 import org.apache.maven.plugin.AbstractMojo;
-import org.apache.maven.plugins.annotations.Mojo;
 import org.apache.maven.plugin.MojoExecutionException;
 import org.apache.maven.plugins.annotations.LifecyclePhase;
+import org.apache.maven.plugins.annotations.Mojo;
 import org.apache.maven.plugins.annotations.Parameter;
 import org.codehaus.plexus.util.IOUtil;
 
+import com.sun.net.httpserver.HttpExchange;
+import com.sun.net.httpserver.HttpHandler;
+import com.sun.net.httpserver.HttpServer;
+
+@SuppressWarnings("restriction")
 @Mojo(name = "repo-server", defaultPhase = LifecyclePhase.NONE)
 public class IvyBridgeRepoServerMojo
     extends AbstractMojo {

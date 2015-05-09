@@ -18,6 +18,7 @@ import java.util.Map.Entry;
 import java.util.TreeMap;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+
 import org.apache.http.NameValuePair;
 import org.apache.http.client.utils.URLEncodedUtils;
 
@@ -52,7 +53,7 @@ public class BeanUriParameters {
                     }
 
                     @SuppressWarnings("unchecked")
-                    Map<String, Object> submap = (Map) pd.getReadMethod().invoke(
+                    Map<String, Object> submap = (Map<String, Object>) pd.getReadMethod().invoke(
                         bean, new Object[0]);
                     if (submap == null) {
                         submap = new TreeMap<>();
@@ -162,7 +163,8 @@ public class BeanUriParameters {
         URI uri = new URI(uriString);
         String rawQuery = uri.getRawQuery();
         Map<String, String> parameters = parseParameters(rawQuery);
-        URI root = new URI(uri.getScheme(),
+        @SuppressWarnings("unused")
+		URI root = new URI(uri.getScheme(),
             uri.getUserInfo(), uri.getHost(), uri.getPort(),
             uri.getPath(), null, null);
 
