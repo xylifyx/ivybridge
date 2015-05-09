@@ -79,6 +79,7 @@
     <modules>
         <module>ivybridge-facade</module>
         <module>ivybridge-wagon</module>
+        <module>ivybridge-maven-plugin</module>
     </modules>
      
     <build>
