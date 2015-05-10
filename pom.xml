@@ -69,10 +69,12 @@
 
     <developers>
         <developer>
-            <email>erik.martino@gmail.com</email>
-            <name>Erik Martino</name>
-            <url>https://github.com/xylifyx</url>
             <id>xylifyx</id>
+            <name>Erik Martino</name>
+            <email>erik.martino@gmail.com</email>
+            <organization>Profundo</organization>
+            <url>https://github.com/xylifyx</url>
+            <organizationUrl>https://github.com/xylifyx</organizationUrl>
         </developer>
     </developers>
     
