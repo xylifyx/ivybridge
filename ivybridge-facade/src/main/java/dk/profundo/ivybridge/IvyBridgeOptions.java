@@ -14,7 +14,8 @@ import java.util.TreeMap;
  *
  */
 public class IvyBridgeOptions {
-    
+
+    private String ivysettings;
     private String artroot;
     private String artpattern;
     private String ivyroot;
@@ -24,47 +25,47 @@ public class IvyBridgeOptions {
     private String branch;
     private Map<String, String> classifierConfiguration;
     private Map<String, String> extConfiguration;
-    
+
     public String getArtroot() {
         return artroot;
     }
-    
+
     public void setArtroot(String artroot) {
         this.artroot = artroot;
     }
-    
+
     public String getArtpattern() {
         return artpattern;
     }
-    
+
     public void setArtpattern(String artpattern) {
         this.artpattern = artpattern;
     }
-    
+
     public String getIvyroot() {
         return ivyroot;
     }
-    
+
     public void setIvyroot(String ivyroot) {
         this.ivyroot = ivyroot;
     }
-    
+
     public String getIvypattern() {
         return ivypattern;
     }
-    
+
     public void setIvypattern(String ivypattern) {
         this.ivypattern = ivypattern;
     }
-    
+
     public String getCacheBasedir() {
         return cacheBasedir;
     }
-    
+
     public void setCacheBasedir(String cacheBasedir) {
         this.cacheBasedir = cacheBasedir;
     }
-    
+
     public Map<String, String> getConfscope() {
         if (configurationScope == null) {
             Map<String, String> m = configurationScope = new TreeMap<>();
@@ -76,29 +77,37 @@ public class IvyBridgeOptions {
         }
         return configurationScope;
     }
-    
+
     public Map<String, String> getClassifierConfiguration() {
         if (classifierConfiguration == null) {
             classifierConfiguration = new TreeMap<>();
         }
         return classifierConfiguration;
     }
-    
+
     public Map<String, String> getExtConfiguration() {
         if (extConfiguration == null) {
             extConfiguration = new TreeMap<>();
         }
         return extConfiguration;
     }
-    
+
     public String getBranch() {
         return branch;
     }
-    
+
     public void setBranch(String branch) {
         this.branch = branch;
     }
-    
+
+    public String getIvysettings() {
+        return ivysettings;
+    }
+
+    public void setIvysettings(String ivysettings) {
+        this.ivysettings = ivysettings;
+    }
+
     public static IvyBridgeOptions newOptionsFromUri(String uriString) throws URISyntaxException, IntrospectionException, IllegalArgumentException {
         URI uri = new URI(uriString);
         String rawQuery = uri.getRawQuery();
