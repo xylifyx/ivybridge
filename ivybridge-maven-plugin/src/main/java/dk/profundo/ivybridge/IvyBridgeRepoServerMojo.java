@@ -26,7 +26,6 @@ import java.net.URISyntaxException;
 import java.net.UnknownHostException;
 import java.text.ParseException;
 
-import org.apache.maven.plugin.AbstractMojo;
 import org.apache.maven.plugin.MojoExecutionException;
 import org.apache.maven.plugins.annotations.LifecyclePhase;
 import org.apache.maven.plugins.annotations.Mojo;
@@ -40,7 +39,7 @@ import com.sun.net.httpserver.HttpServer;
 @SuppressWarnings("restriction")
 @Mojo(name = "repo-server", defaultPhase = LifecyclePhase.NONE)
 public class IvyBridgeRepoServerMojo
-    extends AbstractMojo {
+    extends AbstractIvyBridgeMojo {
 
     /**
      * The port number of the Maven repository
@@ -48,8 +47,6 @@ public class IvyBridgeRepoServerMojo
     @Parameter(property = "port", defaultValue = "8159")
     private int port;
 
-    @Parameter(property = "ivyrepo", required = true)
-    private String ivyrepo;
 
     HttpServer server;
     private Thread mainThread;
@@ -105,7 +102,7 @@ public class IvyBridgeRepoServerMojo
                 public void handle(HttpExchange he) throws IOException {
                     try {
                         serve(he);
-                    } catch (Exception ex) {
+                    } catch (URISyntaxException | IntrospectionException | ParseException  ex) {
                         getLog().error(ex);
                         sendNotFound(he);
                     }
@@ -160,9 +157,9 @@ public class IvyBridgeRepoServerMojo
         byte[] errorMessage = "<html><body><h1>Artifact not found</h1><p>name</p>".getBytes("UTF-8");
         exchange.getResponseHeaders().add("Content-Type", "text/html;charset=utf8");
         exchange.sendResponseHeaders(404, errorMessage.length);
-        final OutputStream out = exchange.getResponseBody();
-        out.write(errorMessage);
-        out.close();
+        try (OutputStream out = exchange.getResponseBody()) {
+            out.write(errorMessage);
+        }
         exchange.close();
     }
 
