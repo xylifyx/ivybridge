@@ -16,8 +16,6 @@ import java.nio.file.Paths;
 import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 import org.apache.ivy.Ivy;
 import org.apache.ivy.core.cache.DefaultResolutionCacheManager;
@@ -120,6 +118,16 @@ public class IvyBridgeImpl implements IvyBridge {
     }
 
     @Override
+    public URI makePom(URI ivyFile) throws ParseException, IOException {
+        URL ivyXml = ivyFile.toURL();
+        ResolveReport resolve = getIvy().resolve(ivyXml);
+        final ModuleDescriptor md = resolve.getModuleDescriptor();
+        File tmpFile = File.createTempFile("pom", ".xml");
+        PomModuleDescriptorWriter.write(md, tmpFile, pomWriterOptions());
+        return tmpFile.toURI();
+    }
+    
+    @Override
     public byte[] getPomContent(final String organisation, final String name,
         final String revision, final String branch, final String depConf)
         throws ParseException, IOException {
@@ -137,13 +145,7 @@ public class IvyBridgeImpl implements IvyBridge {
                     .getModuleRevision();
                 final ModuleDescriptor md = moduleRevision.getDescriptor();
                 File tmpFile = File.createTempFile("pom", ".xml");
-                PomWriterOptions options = new PomWriterOptions();
-                if (opts != null
-                    && opts.getConfscope().isEmpty() == false) {
-                    options.setMapping(new ConfigurationScopeMapping(opts
-                        .getConfscope()));
-                }
-                PomModuleDescriptorWriter.write(md, tmpFile, options);
+                PomModuleDescriptorWriter.write(md, tmpFile, pomWriterOptions());
                 byte[] pomFileContent = Files.readAllBytes(Paths.get(tmpFile
                     .toURI()));
                 tmpFile.delete();
@@ -154,6 +156,16 @@ public class IvyBridgeImpl implements IvyBridge {
         } finally {
             ivy.popContext();
         }
+    }
+
+    private PomWriterOptions pomWriterOptions() {
+        PomWriterOptions pop = new PomWriterOptions();
+        if (options != null
+            && options.getConfscope().isEmpty() == false) {
+            pop.setMapping(new ConfigurationScopeMapping(options
+                .getConfscope()));
+        }
+        return pop;
     }
 
     @Override

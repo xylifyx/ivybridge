@@ -31,4 +31,6 @@ public interface IvyBridge {
     public Ivy getIvy();
     
     public void setIvy(Ivy ivy);
+    
+    public URI makePom(URI ivyFile) throws ParseException, IOException;
 }
