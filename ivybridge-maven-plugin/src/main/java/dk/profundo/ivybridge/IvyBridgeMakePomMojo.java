@@ -41,7 +41,7 @@ public class IvyBridgeMakePomMojo extends AbstractIvyBridgeMojo {
 
     @Parameter(property = "ivyfile", defaultValue = "ivy.xml")
     String ivyfile;
-    
+
     @Parameter(property = "pomfile", defaultValue = "pom.xml")
     String pomfile;
     

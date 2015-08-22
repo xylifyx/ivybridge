@@ -6,3 +6,6 @@
 nohup.out
 *.releaseBackup
 release.properties
+*.iml
+*.ipr
+*.iws
