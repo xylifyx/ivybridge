@@ -25,6 +25,7 @@ public class IvyBridgeOptions {
     private String branch;
     private Map<String, String> classifierConfiguration;
     private Map<String, String> extConfiguration;
+    private Map<String, String> rule;
 
     public String getArtroot() {
         return artroot;
@@ -83,6 +84,13 @@ public class IvyBridgeOptions {
             classifierConfiguration = new TreeMap<>();
         }
         return classifierConfiguration;
+    }
+    
+    public Map<String, String> getRule() {
+        if (rule == null) {
+            rule = new TreeMap<>();
+        }
+        return rule;
     }
 
     public Map<String, String> getExtConfiguration() {

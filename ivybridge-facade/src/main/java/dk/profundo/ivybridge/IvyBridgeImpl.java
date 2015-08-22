@@ -33,6 +33,10 @@ import org.apache.ivy.core.resolve.IvyNode;
 import org.apache.ivy.core.resolve.ResolveOptions;
 import org.apache.ivy.core.resolve.ResolvedModuleRevision;
 import org.apache.ivy.core.settings.IvySettings;
+import org.apache.ivy.plugins.namespace.MRIDTransformationRule;
+import org.apache.ivy.plugins.namespace.Namespace;
+import org.apache.ivy.plugins.namespace.NamespaceRule;
+import org.apache.ivy.plugins.namespace.NamespaceTransformer;
 import org.apache.ivy.plugins.parser.m2.PomModuleDescriptorWriter;
 import org.apache.ivy.plugins.parser.m2.PomWriterOptions;
 import org.apache.ivy.plugins.parser.m2.PomWriterOptions.ConfigurationScopeMapping;
@@ -72,7 +76,7 @@ public class IvyBridgeImpl implements IvyBridge {
     private static Ivy getIvy(String artroot, String artpattern,
         String ivyroot, String ivypattern, String cacheBasedir, String ivysettings) {
         final Ivy ivy;
-        
+
         if (ivysettings == null) {
             ivy = Ivy.newInstance(null);
             final IvyRepResolver r = new IvyRepResolver();
@@ -96,16 +100,15 @@ public class IvyBridgeImpl implements IvyBridge {
             try {
                 settings.load(new URL(ivysettings));
             } catch (MalformedURLException ex) {
-                throw new IllegalArgumentException("ivysettings must be an url",ex);
+                throw new IllegalArgumentException("ivysettings must be an url", ex);
             } catch (ParseException ex) {
-                throw new IllegalArgumentException("cannot parse ivysettings",ex);
+                throw new IllegalArgumentException("cannot parse ivysettings", ex);
             } catch (IOException ex) {
-                throw new IllegalArgumentException("cannot load ivysettings",ex);
+                throw new IllegalArgumentException("cannot load ivysettings", ex);
             }
             ivy = Ivy.newInstance(settings);
         }
-            
-       
+
         if (cacheBasedir != null) {
             ResolutionCacheManager resolutionCacheManager = ivy
                 .getResolutionCacheManager();
@@ -120,13 +123,45 @@ public class IvyBridgeImpl implements IvyBridge {
     @Override
     public URI makePom(URI ivyFile) throws ParseException, IOException {
         URL ivyXml = ivyFile.toURL();
+
         ResolveReport resolve = getIvy().resolve(ivyXml);
         final ModuleDescriptor md = resolve.getModuleDescriptor();
+
+//        Namespace ns = new Namespace() {
+//
+//            @Override
+//            public NamespaceTransformer getToSystemTransformer() {
+//                return new NamespaceTransformer() {
+//                    @Override
+//                    public ModuleRevisionId transform(ModuleRevisionId mrid) {
+//                        if (mrid == null) {
+//                            return null;
+//                        }
+//                        if (mrid.getRevision().equals("latest.integration")) {
+//                            return ModuleRevisionId.newInstance(mrid, "${project.version}");
+//                        } else {
+//                            return mrid;
+//                        }
+//                    }
+//
+//                    @Override
+//                    public boolean isIdentity() {
+//                        return false;
+//                    }
+//                };
+//            }
+//
+//        };
+
+        TransformationRules tr = new TransformationRules(this.getOptions());
+        
+        final ModuleDescriptor tmd = DefaultModuleDescriptor.transformInstance(md, tr.getNamespace());
+
         File tmpFile = File.createTempFile("pom", ".xml");
-        PomModuleDescriptorWriter.write(md, tmpFile, pomWriterOptions());
+        PomModuleDescriptorWriter.write(tmd, tmpFile, pomWriterOptions());
         return tmpFile.toURI();
     }
-    
+
     @Override
     public byte[] getPomContent(final String organisation, final String name,
         final String revision, final String branch, final String depConf)
@@ -145,7 +180,8 @@ public class IvyBridgeImpl implements IvyBridge {
                     .getModuleRevision();
                 final ModuleDescriptor md = moduleRevision.getDescriptor();
                 File tmpFile = File.createTempFile("pom", ".xml");
-                PomModuleDescriptorWriter.write(md, tmpFile, pomWriterOptions());
+                final PomWriterOptions pomWriterOptions = pomWriterOptions();
+                PomModuleDescriptorWriter.write(md, tmpFile, pomWriterOptions);
                 byte[] pomFileContent = Files.readAllBytes(Paths.get(tmpFile
                     .toURI()));
                 tmpFile.delete();
@@ -165,6 +201,7 @@ public class IvyBridgeImpl implements IvyBridge {
             pop.setMapping(new ConfigurationScopeMapping(options
                 .getConfscope()));
         }
+
         return pop;
     }
 
@@ -184,13 +221,6 @@ public class IvyBridgeImpl implements IvyBridge {
             @SuppressWarnings("unchecked")
             List<Artifact> artifacts = resolve.getArtifacts();
             artifacts = new ArrayList<>(artifacts);
-//			Collections.sort(artifacts, new Comparator<Artifact>() {
-//
-//				@Override
-//				public int compare(Artifact o1, Artifact o2) {
-//					o1.getConfigurations()
-//				}
-//			});
 
             for (Artifact a : artifacts) {
 

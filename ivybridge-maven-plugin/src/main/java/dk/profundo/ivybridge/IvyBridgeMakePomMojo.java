@@ -38,7 +38,7 @@ import org.codehaus.plexus.util.IOUtil;
  */
 @Mojo(name = "makepom", defaultPhase = LifecyclePhase.NONE, requiresProject = false)
 public class IvyBridgeMakePomMojo extends AbstractIvyBridgeMojo {
-
+    // mvn dk.profundo.ivybridge:ivybridge-maven-plugin:LATEST:makepom
     @Parameter(property = "ivyfile", defaultValue = "ivy.xml")
     String ivyfile;
 
@@ -53,6 +53,9 @@ public class IvyBridgeMakePomMojo extends AbstractIvyBridgeMojo {
             final URI ivf = Paths.get(ivyfile).toAbsolutePath().toUri();
             //MavenRepositoryProxy proxy = new MavenRepositoryProxy(options);
             URI pom = bridge.makePom(ivf);
+            
+            
+            
             IOUtil.copy(pom.toURL().openStream(), new FileOutputStream(new File(pomfile)));
         } catch (URISyntaxException | IntrospectionException 
             | IllegalArgumentException | ParseException 
