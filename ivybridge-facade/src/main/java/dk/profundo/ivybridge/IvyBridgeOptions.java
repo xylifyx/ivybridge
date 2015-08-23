@@ -21,11 +21,20 @@ public class IvyBridgeOptions {
     private String ivyroot;
     private String ivypattern;
     private String cacheBasedir;
+    private String pomtemplate;
     private Map<String, String> configurationScope;
     private String branch;
     private Map<String, String> classifierConfiguration;
     private Map<String, String> extConfiguration;
     private Map<String, String> rule;
+
+    public String getPomtemplate() {
+        return pomtemplate;
+    }
+
+    public void setPomtemplate(String pomtemplate) {
+        this.pomtemplate = pomtemplate;
+    }
 
     public String getArtroot() {
         return artroot;
@@ -85,7 +94,7 @@ public class IvyBridgeOptions {
         }
         return classifierConfiguration;
     }
-    
+
     public Map<String, String> getRule() {
         if (rule == null) {
             rule = new TreeMap<>();

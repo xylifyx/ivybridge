@@ -41,6 +41,7 @@ import org.apache.ivy.plugins.parser.m2.PomModuleDescriptorWriter;
 import org.apache.ivy.plugins.parser.m2.PomWriterOptions;
 import org.apache.ivy.plugins.parser.m2.PomWriterOptions.ConfigurationScopeMapping;
 import org.apache.ivy.plugins.resolver.IvyRepResolver;
+import sun.misc.IOUtils;
 
 /**
  *
@@ -49,7 +50,7 @@ import org.apache.ivy.plugins.resolver.IvyRepResolver;
 public class IvyBridgeImpl implements IvyBridge {
 
     private IvyBridgeOptions options;
-    private Ivy ivy;
+    private Ivy _ivy;
 
     public IvyBridgeImpl() {
 
@@ -62,10 +63,10 @@ public class IvyBridgeImpl implements IvyBridge {
 
     @Override
     public Ivy getIvy() {
-        if (ivy == null) {
-            ivy = getIvy(getOptions());
+        if (_ivy == null) {
+            _ivy = getIvy(getOptions());
         }
-        return ivy;
+        return _ivy;
     }
 
     private static Ivy getIvy(IvyBridgeOptions o) {
@@ -201,7 +202,14 @@ public class IvyBridgeImpl implements IvyBridge {
             pop.setMapping(new ConfigurationScopeMapping(options
                 .getConfscope()));
         }
-
+        if (options.getPomtemplate() != null) {
+            String template = options.getPomtemplate();
+            final File file = new File(template);
+            if (!file.isFile()) {
+                throw new IllegalArgumentException(template);
+            }
+            pop.setTemplate(file);
+        } 
         return pop;
     }
 
@@ -291,6 +299,6 @@ public class IvyBridgeImpl implements IvyBridge {
 
     @Override
     public void setIvy(Ivy ivy) {
-        this.ivy = ivy;
+        this._ivy = ivy;
     }
 }
