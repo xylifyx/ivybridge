@@ -8,7 +8,7 @@ import java.util.regex.Pattern;
 
 /**
  * @author emartino
- *
+ *        
  */
 public class MavenPathMapper {
     public static MavenArtifactId parseResourcePath(String resourcePath) {

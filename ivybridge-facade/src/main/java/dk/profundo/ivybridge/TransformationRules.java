@@ -18,75 +18,124 @@
  */
 package dk.profundo.ivybridge;
 
+import java.util.Arrays;
+import java.util.HashSet;
 import java.util.Map;
+import java.util.Set;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+
+import org.apache.ivy.core.module.descriptor.Artifact;
+import org.apache.ivy.core.module.descriptor.Configuration;
+import org.apache.ivy.core.module.descriptor.DefaultExtendsDescriptor;
+import org.apache.ivy.core.module.descriptor.DefaultModuleDescriptor;
+import org.apache.ivy.core.module.descriptor.DependencyDescriptor;
+import org.apache.ivy.core.module.descriptor.ExtendsDescriptor;
+import org.apache.ivy.core.module.descriptor.ModuleDescriptor;
+import org.apache.ivy.core.module.id.ModuleRules;
 import org.apache.ivy.plugins.namespace.MRIDRule;
 import org.apache.ivy.plugins.namespace.MRIDTransformationRule;
+import org.apache.ivy.plugins.namespace.NameSpaceHelper;
 import org.apache.ivy.plugins.namespace.Namespace;
 import org.apache.ivy.plugins.namespace.NamespaceRule;
+import org.apache.ivy.plugins.namespace.NamespaceTransformer;
+import org.apache.ivy.util.Message;
 
 /**
  *
  * @author emartino
  */
-public class TransformationRules {
-
+public final class TransformationRules {
+    
     IvyBridgeOptions settings;
     Namespace namespace = new Namespace();
-
+    
     public Namespace getNamespace() {
         return namespace;
     }
-
-    
     
     public TransformationRules(IvyBridgeOptions settings) {
         this.settings = settings;
         init();
     }
-
+    
     Pattern rulePattern = Pattern.compile("(org|mod|rev):(.*)=(.*)");
-
+    
     protected void init() {
-        for (Map.Entry<String, String> e : settings.getRule().entrySet()) {
+        
+        for (Map.Entry<String, String> e : settings.getFromivy().entrySet()) {
             NamespaceRule nsrule = new NamespaceRule();
-            final String value = e.getValue();
-            String[] components = value.split(",");
-            MRIDRule src = new MRIDRule();
-            MRIDRule dest = new MRIDRule();
-            for (String c : components) {
-                final Matcher matcher = rulePattern.matcher(c);
-                
-                if (matcher.matches()) {
-                    final String component = matcher.group(1);
-                    final String from = matcher.group(2);
-                    final String to = matcher.group(3);
-                    switch (component) {
-                        case "org":
-                            src.setOrg(from);
-                            dest.setOrg(to);
-                            break;
-                        case "mod":
-                            src.setModule(from);
-                            dest.setModule(to);
-                            break;
-                        case "rev":
-                            src.setRev(from);
-                            dest.setRev(to);
-                            break;
-                        default:
-                            throw new IllegalArgumentException();
-                    } 
-                } else {
-                    throw new IllegalArgumentException("rule format: org:from=to,mod:from=to,rev:from=to");
-                }
-                MRIDTransformationRule nstrule = new MRIDTransformationRule();
-                nstrule.addSrc(src);
-                nstrule.addDest(dest);
-                nsrule.addTosystem(nstrule);
-                namespace.addRule(nsrule);
-            } 
+            final String toSystem = e.getValue();
+            MRIDTransformationRule toRule = parseRule(toSystem);
+            final String fromSystem = settings.getToivy().get(e.getKey());
+            if (fromSystem == null) {
+                throw new IllegalArgumentException("mismatching rules: " + e.getKey());
+            }
+            MRIDTransformationRule fromRule = parseRule(fromSystem);
+            
+            nsrule.addFromsystem(fromRule);
+            nsrule.addTosystem(toRule);
+            
+            namespace.addRule(nsrule);
         }
+        
+        Set<String> mismatchingRuleIds = new HashSet<>(settings.getFromivy().keySet());
+        mismatchingRuleIds.removeAll(settings.getToivy().keySet());
+        
+        if (mismatchingRuleIds.isEmpty() == false) {
+            throw new IllegalArgumentException("mismatching rules: " + mismatchingRuleIds);
+        }
+        
+        namespace.setName("ivybridge");
+    }
+    
+    private MRIDTransformationRule parseRule(String value) throws IllegalArgumentException {
+        String[] cs = value.split(",");
+        
+        MRIDRule src = new MRIDRule();
+        MRIDRule dest = new MRIDRule();
+        for (String c : cs) {
+            final Matcher matcher = rulePattern.matcher(c);
+            if (matcher.matches()) {
+                final String component = matcher.group(1);
+                final String from = matcher.group(2);
+                final String to = matcher.group(3);
+                switch (component) {
+                case "org":
+                    src.setOrg(from);
+                    dest.setOrg(to);
+                    break;
+                case "mod":
+                    src.setModule(from);
+                    dest.setModule(to);
+                    break;
+                case "rev":
+                    src.setRev(from);
+                    dest.setRev(to);
+                    break;
+                default:
+                    throw new IllegalArgumentException();
+                }
+            }
+            else {
+                throw new IllegalArgumentException("rule format: org:from=to,mod:from=to,rev:from=to");
+            }
+        }
+        MRIDTransformationRule nstrule = new MRIDTransformationRule();
+        nstrule.addSrc(src);
+        nstrule.addDest(dest);
+        return nstrule;
+    }
+    
+    public static ModuleDescriptor reverseTransformInstance(
+            ModuleDescriptor md, final Namespace ns) {
+        return DefaultModuleDescriptor.transformInstance(md, new Namespace() {
+            
+            @Override
+            public NamespaceTransformer getToSystemTransformer() {
+                return ns.getToSystemTransformer();
+            }
+            
+        });
     }
 }

@@ -34,7 +34,8 @@ import org.apache.maven.plugins.annotations.Parameter;
 import org.codehaus.plexus.util.IOUtil;
 
 /**
- * Creates a pom.xml file based on an ivy file
+ * Creates a pom.xml file based on an ivy file. Example
+ * <code>mvn -Dpomtemplate=../pom.template dk.profundo.ivybridge:ivybridge-maven-plugin:LATEST:makepom -Divyrepo='ivybridge?ivysettings=file:/home/coder/development/ivy/ivysettings-development.xml&confscope.test.unit=test&rule.def=rev:latest.integration=1.0-SNAPSHOT'</code>
  */
 @Mojo(name = "makepom", defaultPhase = LifecyclePhase.NONE, requiresProject = false)
 public class IvyBridgeMakePomMojo extends AbstractIvyBridgeMojo {
@@ -47,6 +48,9 @@ public class IvyBridgeMakePomMojo extends AbstractIvyBridgeMojo {
     @Parameter(property = "pomfile", defaultValue = "pom.xml")
     String pomfile;
     
+    @Parameter(property = "ivysettings", required=false)
+    String ivysettings;
+    
     @Parameter(property = "pomtemplate")
     String template;
 
@@ -56,6 +60,9 @@ public class IvyBridgeMakePomMojo extends AbstractIvyBridgeMojo {
             IvyBridgeOptions options = IvyBridgeOptions.newOptionsFromUri(ivyrepo);
             if (template != null) {
                 options.setPomtemplate(template);
+            }
+            if (ivysettings != null) {
+            	options.setIvysettings(ivysettings);
             }
             IvyBridge bridge = new IvyBridgeImpl(options);
             final URI ivf = Paths.get(ivyfile).toAbsolutePath().toUri();

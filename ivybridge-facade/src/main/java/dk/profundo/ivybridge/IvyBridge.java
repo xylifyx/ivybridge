@@ -19,11 +19,11 @@ public interface IvyBridge {
     public byte[] getPomContent(final String organisation, final String name,
             final String revision,
             final String branch, final String depConf) throws ParseException, IOException;
-    
+            
     public URI getArtifact(final String organisation, final String name, final String revision,
             final String branch,
             final String depConf, final String type, final String ext) throws ParseException, IOException;
-    
+            
     public IvyBridgeOptions getOptions();
     
     public void setOptions(IvyBridgeOptions options);

@@ -9,7 +9,7 @@ import org.junit.Test;
 
 /**
  * @author emartino
- *
+ *        
  */
 public class MavenPathMapperTest {
     

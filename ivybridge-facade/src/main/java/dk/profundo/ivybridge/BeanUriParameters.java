@@ -24,37 +24,37 @@ import org.apache.http.client.utils.URLEncodedUtils;
 
 /**
  * @author emartino
- *
+ *        
  */
 public class BeanUriParameters {
-
+    
     private final Object bean;
     private final BeanInfo beanInfo;
-
+    
     public BeanUriParameters(Object bean) throws IntrospectionException {
         this.bean = bean;
         this.beanInfo = Introspector.getBeanInfo(bean.getClass());
     }
-
+    
     public void fromParameters(Map<String, String> map)
-        throws IllegalArgumentException {
+            throws IllegalArgumentException {
         for (Entry<String, String> e : map.entrySet()) {
             try {
                 String name = e.getKey();
                 String stringValue = e.getValue();
-
+                
                 if (name.contains(".")) {
                     String prefix = name.substring(0, name.indexOf('.'));
                     String suffix = name.substring(name.indexOf('.') + 1);
-
+                    
                     PropertyDescriptor pd = getPropertyDescriptor(prefix);
                     if (pd == null) {
                         continue;
                     }
-
+                    
                     @SuppressWarnings("unchecked")
                     Map<String, Object> submap = (Map<String, Object>) pd.getReadMethod().invoke(
-                        bean, new Object[0]);
+                            bean, new Object[0]);
                     if (submap == null) {
                         submap = new TreeMap<>();
                         pd.getWriteMethod().invoke(bean, submap);
@@ -62,53 +62,55 @@ public class BeanUriParameters {
                     Object value = parse(stringValue, String.class);
                     submap.put(suffix, value);
                     // fromParameters(submap,suffix,stringValue);
-                } else {
+                }
+                else {
                     fromParameters(name, stringValue);
                 }
-            } catch (RuntimeException |
-                IllegalAccessException |
-                InvocationTargetException ex) {
+            }
+            catch (RuntimeException | IllegalAccessException | InvocationTargetException ex) {
                 Logger.getLogger(getClass().getName()).log(Level.WARNING, "option parsing", ex);
             }
         }
     }
-
+    
     private void fromParameters(String name, String stringValue)
-        throws IllegalAccessException, IllegalArgumentException,
-        InvocationTargetException {
+            throws IllegalAccessException, IllegalArgumentException,
+            InvocationTargetException {
         PropertyDescriptor pd = getPropertyDescriptor(name);
         if (pd == null) {
             return;
         }
         Object value = parse(stringValue, pd.getPropertyType());
-
+        
         if (value == null) {
             return;
         }
-
+        
         Method writeMethod = pd.getWriteMethod();
         if (writeMethod == null) {
             return;
         }
         writeMethod.invoke(bean, value);
     }
-
+    
     private Object parse(String stringValue, Class<?> pt) {
         Object value;
         if (pt == String.class) {
             value = stringValue;
-        } else if (pt == Integer.class || pt == Integer.TYPE) {
+        }
+        else if (pt == Integer.class || pt == Integer.TYPE) {
             value = Integer.parseInt(stringValue);
-        } else {
+        }
+        else {
             Logger.getLogger(getClass().getName()).log(Level.WARNING, "Unsupported type: {0}", pt);
             return null;
         }
         return value;
     }
-
+    
     private PropertyDescriptor getPropertyDescriptor(String name) {
         PropertyDescriptor[] propertyDescriptors = beanInfo
-            .getPropertyDescriptors();
+                .getPropertyDescriptors();
         for (PropertyDescriptor pd : propertyDescriptors) {
             if (pd.getName().equals(name)) {
                 return pd;
@@ -116,15 +118,15 @@ public class BeanUriParameters {
         }
         return null;
     }
-
+    
     public Map<String, String> toParameters() throws IllegalAccessException,
-        IllegalArgumentException, InvocationTargetException {
+            IllegalArgumentException, InvocationTargetException {
         PropertyDescriptor[] propertyDescriptors = beanInfo
-            .getPropertyDescriptors();
+                .getPropertyDescriptors();
         Map<String, String> parameters = new TreeMap<>();
         for (PropertyDescriptor pd : propertyDescriptors) {
             String name = pd.getName();
-
+            
             Class<?> type = pd.getPropertyType();
             Method readMethod = pd.getReadMethod();
             Method writeMethod = pd.getWriteMethod();
@@ -138,13 +140,14 @@ public class BeanUriParameters {
         }
         return parameters;
     }
-
+    
     protected void toParameters(Map<String, String> parameters, String name,
-        Class<?> type, Object value) {
+            Class<?> type, Object value) {
         if (type == String.class || type == Integer.class
-            || type == Integer.TYPE) {
+                || type == Integer.TYPE) {
             parameters.put(name, String.valueOf(value));
-        } else if (Map.class.isAssignableFrom(type)) {
+        }
+        else if (Map.class.isAssignableFrom(type)) {
             Map<?, ?> map = (Map<?, ?>) value;
             for (Map.Entry<?, ?> e : map.entrySet()) {
                 String subname = name + "." + e.getKey();
@@ -156,22 +159,22 @@ public class BeanUriParameters {
             }
         }
     }
-
+    
     public final static String ROOT = "__ROOT__";
-
+    
     public static Map<String, String> parseUri(String uriString) throws URISyntaxException {
         URI uri = new URI(uriString);
         String rawQuery = uri.getRawQuery();
         Map<String, String> parameters = parseParameters(rawQuery);
         @SuppressWarnings("unused")
-		URI root = new URI(uri.getScheme(),
-            uri.getUserInfo(), uri.getHost(), uri.getPort(),
-            uri.getPath(), null, null);
-
+        URI root = new URI(uri.getScheme(),
+                uri.getUserInfo(), uri.getHost(), uri.getPort(),
+                uri.getPath(), null, null);
+                
         // parameters.put(ROOT, root.toASCIIString());
         return parameters;
     }
-
+    
     static Map<String, String> parseParameters(String rawQuery) {
         final List<NameValuePair> nameValuePairs = URLEncodedUtils.parse(rawQuery, Charset.forName("UTF-8"));
         Map<String, String> parameters = new TreeMap<>();
@@ -180,5 +183,5 @@ public class BeanUriParameters {
         }
         return parameters;
     }
-
+    
 }

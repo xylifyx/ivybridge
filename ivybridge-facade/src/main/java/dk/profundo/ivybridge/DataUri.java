@@ -7,7 +7,7 @@ import javax.xml.bind.DatatypeConverter;
 
 /**
  * @author emartino
- *
+ *        
  */
 public class DataUri {
     private static final String DATA_BINARY_OCTET_STREAM_BASE64 = "data:binary/octet-stream;base64,";

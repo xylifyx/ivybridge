@@ -1,0 +1,1 @@
+    for f in */; do (cd $f; test -f ivy.xml && mvn dk.profundo.ivybridge:ivybridge-maven-plugin:LATEST:makepom -Divysettings=file:/code/trunk/workspace/build-tools/branches/trunk-all/ivysettings-development.xml -Dpomtemplate=../pom.template.xml -Divyrepo='ivy?confscope.test.unit=test') ; done
