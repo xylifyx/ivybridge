@@ -226,13 +226,8 @@ public class IvyBridgeImpl implements IvyBridge {
         Ivy ivy = getIvy();
         ivy.pushContext();
         try {
-            ResolveOptions ro = new ResolveOptions();
-            
-            // nro.setConfs(new String[] { depConf });
-            
             ResolvedModuleRevision mod = ivy.findModule(ModuleRevisionId.newInstance(
                     organisation, name, branch, revision));
-            @SuppressWarnings("unchecked")
             Artifact[] artifacts = mod.getDescriptor().getAllArtifacts();
             
             List<String> orderedConfigurations = getConfigurationOrder(mod.getDescriptor(), depConf);
