@@ -140,8 +140,32 @@ public class IvyBridgeImpl implements IvyBridge {
         final ModuleDescriptor tmd = DefaultModuleDescriptor.transformInstance(md, namespace);
         
         File tmpFile = File.createTempFile("pom", ".xml");
-        PomModuleDescriptorWriter.write(tmd, tmpFile, pomWriterOptions());
+        
+        String artifactPackaging = getPackaging(tmd);
+        
+        PomWriterOptions pomWriterOptions = pomWriterOptions();
+        pomWriterOptions.setArtifactPackaging(artifactPackaging);
+        PomModuleDescriptorWriter.write(tmd, tmpFile, pomWriterOptions);
         return tmpFile.toURI();
+    }
+
+    /**
+     * @param tmd
+     * @return
+     */
+    private String getPackaging(final ModuleDescriptor tmd) {
+        String artifactPackaging="jar";
+        Artifact[] allArtifacts = tmd.getAllArtifacts();
+        for(Artifact a : allArtifacts) {
+            if (a.getType().equals("jar") && a.getExt().equals("jar")) {
+                artifactPackaging = "jar";
+                break;
+            } else if (a.getType().equals("war") && a.getExt().equals("war")) {
+                artifactPackaging = "war";
+                break;
+            }
+        }
+        return artifactPackaging;
     }
     
     @Override

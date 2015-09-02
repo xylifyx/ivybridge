@@ -18,28 +18,19 @@
  */
 package dk.profundo.ivybridge;
 
-import java.util.Arrays;
 import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import org.apache.ivy.core.module.descriptor.Artifact;
-import org.apache.ivy.core.module.descriptor.Configuration;
-import org.apache.ivy.core.module.descriptor.DefaultExtendsDescriptor;
 import org.apache.ivy.core.module.descriptor.DefaultModuleDescriptor;
-import org.apache.ivy.core.module.descriptor.DependencyDescriptor;
-import org.apache.ivy.core.module.descriptor.ExtendsDescriptor;
 import org.apache.ivy.core.module.descriptor.ModuleDescriptor;
-import org.apache.ivy.core.module.id.ModuleRules;
 import org.apache.ivy.plugins.namespace.MRIDRule;
 import org.apache.ivy.plugins.namespace.MRIDTransformationRule;
-import org.apache.ivy.plugins.namespace.NameSpaceHelper;
 import org.apache.ivy.plugins.namespace.Namespace;
 import org.apache.ivy.plugins.namespace.NamespaceRule;
 import org.apache.ivy.plugins.namespace.NamespaceTransformer;
-import org.apache.ivy.util.Message;
 
 /**
  *
