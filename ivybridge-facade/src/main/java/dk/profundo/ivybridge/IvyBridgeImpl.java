@@ -324,7 +324,7 @@ public class IvyBridgeImpl implements IvyBridge {
         envelope.addDependency(md);
         
         ResolveOptions resopts = new ResolveOptions();
-        resopts.setTransitive(true);
+        resopts.setTransitive(false);
         resopts.setDownload(false);
         
         final Namespace namespace = tr.getNamespace();
