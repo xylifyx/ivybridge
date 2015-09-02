@@ -56,8 +56,9 @@ public final class PomWriter {
     
     private static final String SKIP_LINE = "SKIP_LINE";
     
+    @SuppressWarnings("serial")
     private static final ConfigurationScopeMapping DEFAULT_MAPPING 
-            = new ConfigurationScopeMapping(new HashMap() {
+            = new ConfigurationScopeMapping(new HashMap<String,String>() {
                 {
                     put("compile", "compile");
                     put("runtime", "runtime");
@@ -212,7 +213,8 @@ public final class PomWriter {
 
     private static void printDependencies(ModuleDescriptor md, PrintWriter out, 
             PomWriterOptions options, int indent, boolean printDependencies) {
-        List extraDeps = options.getExtraDependencies();
+        @SuppressWarnings("unchecked")
+        List<ExtraDependency> extraDeps = options.getExtraDependencies();
         DependencyDescriptor[] dds = getDependencies(md, options);
 
         if (!extraDeps.isEmpty() || (dds.length > 0)) {
@@ -222,7 +224,7 @@ public final class PomWriter {
             }
             
             // print the extra dependencies first
-            for (Iterator it = extraDeps.iterator(); it.hasNext(); ) {
+            for (Iterator<ExtraDependency> it = extraDeps.iterator(); it.hasNext(); ) {
                 PomWriterOptions.ExtraDependency dep = (ExtraDependency) it.next();
                 String groupId = dep.getGroup();
                 if (groupId == null) {
@@ -332,7 +334,7 @@ public final class PomWriter {
             PomWriterOptions options) {
         String[] confs = ConfigurationUtils.replaceWildcards(options.getConfs(), md);
 
-        List result = new ArrayList();
+        List<DependencyDescriptor> result = new ArrayList<>();
         DependencyDescriptor[] dds = md.getDependencies();
         for (int i = 0; i < dds.length; i++) {
             String[] depConfs = dds[i].getDependencyConfigurations(confs);
@@ -353,20 +355,23 @@ public final class PomWriter {
         
         private final IvyVariableContainer variables;
 
-        private Map localVariables = new HashMap();
+        private Map<String,String> localVariables = new HashMap<>();
 
         private IvyVariableContainerWrapper(IvyVariableContainer variables) {
             this.variables = variables;
         }
 
+        @Override
         public void setVariable(String varName, String value, boolean overwrite) {
             localVariables.put(varName, value);
         }
 
+        @Override
         public void setEnvironmentPrefix(String prefix) {
             variables.setEnvironmentPrefix(prefix);
         }
 
+        @Override
         public String getVariable(String name) {
             String result = variables.getVariable(name);
             if (result == null) {
@@ -375,6 +380,7 @@ public final class PomWriter {
             return result;
         }
 
+        @Override
         public Object clone() {
             throw new UnsupportedOperationException();
         }
